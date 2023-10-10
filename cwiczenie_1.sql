@@ -26,7 +26,8 @@ VALUES
 (1, 'POLYGON((8 1.5, 8 4, 10.5 4, 10.5 1.5, 8 1.5))', 'BuildingA'),
 (2, 'POLYGON((4 5, 4 7, 6 7, 6 5, 4 5))', 'BuildingB'),
 (3, 'POLYGON((3 6, 3 8, 5 8, 5 6, 3 6))', 'BuildingC'),
-(4, 'POLYGON((9 8, 9 9, 10 9, 10 8, 9 8))', 'BuildingD');
+(4, 'POLYGON((9 8, 9 9, 10 9, 10 8, 9 8))', 'BuildingD'),
+(5, 'POLYGON((1 1, 1 2, 2 2, 2 1, 1 1))', 'BuildingF');
 
 INSERT INTO drogi
 VALUES
@@ -43,3 +44,43 @@ VALUES
 
 --zad 6
 --a
+SELECT 
+	SUM(ST_Length(d.geometria)) AS "Calkowita dlugosc drog"
+FROM
+	drogi d;
+--b
+SELECT
+	ST_AsText(b.geometria) AS "Geometria",
+	ST_Area(b.geometria) AS "Pole powierzchni",
+	ST_Perimeter(b.geometria) AS "Obwod"
+FROM
+	budynki b
+WHERE
+	nazwa='BuildingA';
+--c
+SELECT
+	b.nazwa AS "Nazwa",
+	ST_Area(b.geometria) AS "Pole powierzchni"
+FROM
+	budynki b
+ORDER BY
+	b.nazwa;
+--d
+SELECT
+	b.nazwa AS "Nazwa",
+	ST_Perimeter(b.geometria) AS "Obwod"
+FROM
+	budynki b
+ORDER BY
+	ST_Area(b.geometria) DESC
+LIMIT 2;
+--e
+SELECT
+	ST_Distance(b.geometria, p.geometria) AS "Najkrotsza odleglosc miedzy budynkiem C i punktem G"
+FROM
+	budynki b,
+	punkty p
+WHERE
+	b.nazwa='BuildingC' AND p.nazwa='G';
+--f
+
