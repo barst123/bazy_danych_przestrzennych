@@ -1,3 +1,6 @@
+--zad 2
+CREATE DATABASE bazy_danych_przestrzennych;
+
 --zad 3
 CREATE EXTENSION postgis;
 
