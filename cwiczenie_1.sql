@@ -83,4 +83,26 @@ FROM
 WHERE
 	b.nazwa='BuildingC' AND p.nazwa='G';
 --f
-
+SELECT
+	ST_Area(b2.geometria)-ST_Area(ST_Intersection(ST_Buffer(b1.geometria, 0.5), b2.geometria)) AS "Pole powierzchni"
+FROM
+	budynki b1,
+	budynki b2
+WHERE
+	b1.nazwa='BuildingB' AND b2.nazwa='BuildingC';
+--g
+SELECT
+	b.id AS "ID",
+	b.nazwa AS "Nazwa"
+FROM
+	drogi d,
+	budynki b
+WHERE
+	d.nazwa='RoadX' AND ST_Y(ST_Centroid(b.geometria))>ST_Y(ST_PointN(d.geometria, 1));
+--h
+SELECT
+	ST_Area(ST_Difference(b.geometria, ST_GeomFromText('Polygon((4 7, 6 7, 6 8, 4 8, 4 7))')))+ST_Area(ST_Difference(ST_GeomFromText('Polygon((4 7, 6 7, 6 8, 4 8, 4 7))'), b.geometria))
+FROM
+	budynki b
+WHERE
+	b.nazwa='BuildingC';
