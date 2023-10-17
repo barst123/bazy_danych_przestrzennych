@@ -18,3 +18,15 @@ CREATE TABLE airportsNew AS
 SELECT
 	a.name, 
 SELECT * FROM airports
+
+--zad6
+SELECT
+	ST_Area(ST_Buffer(ST_ShortestLine(a.geom, l.geom), 1000))
+FROM
+	lakes l, airports a
+WHERE
+	a.name='AMBLER' AND l.names='Iliamna Lake';
+	
+	
+--zad7
+
