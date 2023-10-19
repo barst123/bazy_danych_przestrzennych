@@ -22,7 +22,7 @@ FROM
 --a	
 --zachod
 SELECT 
-	* 
+	geom 
 FROM 
 	airportsNew
 ORDER BY
@@ -30,7 +30,7 @@ ORDER BY
 LIMIT 1;
 --wschod
 SELECT 
-	* 
+	*
 FROM 
 	airportsNew
 ORDER BY
@@ -39,10 +39,13 @@ LIMIT 1;
 --b
 INSERT INTO
 	airportsNew
-VALUE
-	('airportB', 45, );
-SELECT * FROM airportsNew
-
+VALUES
+	('airportB', 45, 
+	 (SELECT ST_Centroid(ST_MakeLine(
+		 (SELECT geom FROM airportsNew ORDER BY ST_Y(geom) DESC LIMIT 1), 
+		 (SELECT geom FROM airportsNew ORDER BY ST_Y(geom) LIMIT 1)
+	 ))));
+	 
 --zad6
 SELECT
 	ST_Area(ST_Buffer(ST_ShortestLine(a.geom, l.geom), 1000))
@@ -56,8 +59,38 @@ SELECT
 	ST_AsText(geom)
 FROM
 	swamp s
+
+SELECT
+	*
+FROM
+	tundra t
 	
 SELECT
 	*
 FROM
 	trees t
+
+SELECT
+	tr.vegdesc, ST_Area(ST_Intersection(tr.geom, ST_Union(tu.geom, s.geom))) AS "Pole powierzchni"
+FROM
+	swamp s,
+	tundra tu,
+	trees tr
+GROUP BY
+	tr.vegdesc;
+
+SELECT
+	ST_AsText(ST_Union(tu.geom, s.geom)) AS "Pole powierzchni"
+FROM
+	swamp s,
+	tundra tu,
+	trees tr
+
+SELECT
+	ST_AsText(ST_Intersection(tr.geom, ST_Union(tu.geom, s.geom))) AS "Pole powierzchni"
+FROM
+	swamp s,
+	tundra tu,
+	trees tr
+GROUP BY
+	tr.vegdesc;
