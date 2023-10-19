@@ -16,8 +16,32 @@ FROM
 --zad5
 CREATE TABLE airportsNew AS
 SELECT
-	a.name, 
-SELECT * FROM airports
+	a.name, a.elev, a.geom
+FROM
+	airports a;
+--a	
+--zachod
+SELECT 
+	* 
+FROM 
+	airportsNew
+ORDER BY
+	ST_Y(geom)
+LIMIT 1;
+--wschod
+SELECT 
+	* 
+FROM 
+	airportsNew
+ORDER BY
+	ST_Y(geom) DESC
+LIMIT 1;
+--b
+INSERT INTO
+	airportsNew
+VALUE
+	('airportB', 45, );
+SELECT * FROM airportsNew
 
 --zad6
 SELECT
@@ -27,6 +51,13 @@ FROM
 WHERE
 	a.name='AMBLER' AND l.names='Iliamna Lake';
 	
-	
 --zad7
-
+SELECT
+	ST_AsText(geom)
+FROM
+	swamp s
+	
+SELECT
+	*
+FROM
+	trees t
