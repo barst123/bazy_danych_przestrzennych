@@ -55,42 +55,35 @@ WHERE
 	a.name='AMBLER' AND l.names='Iliamna Lake';
 	
 --zad7
+--chyba zly wynik
 SELECT
-	ST_AsText(geom)
+	tr.vegdesc, SUM(ST_Area(tr.geom))
 FROM
+	trees tr,
+	tundra tu,
 	swamp s
-
-SELECT
-	*
-FROM
-	tundra t
-	
-SELECT
-	*
-FROM
-	trees t
-
-SELECT
-	tr.vegdesc, ST_Area(ST_Intersection(tr.geom, ST_Union(tu.geom, s.geom))) AS "Pole powierzchni"
-FROM
-	swamp s,
-	tundra tu,
-	trees tr
+WHERE
+	ST_Intersects(tr.geom, s.geom) OR ST_Intersects(tr.geom, tu.geom)
 GROUP BY
 	tr.vegdesc;
-
+--oszukana wersja (shp z qgis)
 SELECT
-	ST_AsText(ST_Union(tu.geom, s.geom)) AS "Pole powierzchni"
+	tr.vegdesc, SUM(ST_Area(ST_Intersection(tr.geom, cts.geom)))
 FROM
-	swamp s,
-	tundra tu,
-	trees tr
-
-SELECT
-	ST_AsText(ST_Intersection(tr.geom, ST_Union(tu.geom, s.geom))) AS "Pole powierzchni"
-FROM
-	swamp s,
-	tundra tu,
-	trees tr
+	trees tr,
+	cw2_tundra_swamp cts
 GROUP BY
 	tr.vegdesc;
+--jak to przyspieszyć
+SET work_mem='32MB';
+SHOW work_mem;
+SELECT
+	tr.vegdesc, SUM(ST_Area(ST_Intersection(tr.geom, ST_Union(tu.geom, s.geom))))
+FROM
+	trees tr,
+	tundra tu,
+	swamp s
+GROUP BY
+	tr.vegdesc;
+RESET work_mem;
+SHOW work_mem;
