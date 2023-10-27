@@ -121,19 +121,21 @@ WHERE
 		ST_MakeLine(
 			(SELECT geom FROM input_points WHERE id='P1'), 
 			(SELECT geom FROM input_points WHERE id='P2'))
-	)<200;
+	)<=200;
 
 --zad7 -poprawic
-SELECT * FROM t2019_kar_poi_table
+SELECT * FROM t2019_kar_poi_table t2019_p WHERE
+	t2019_p.type='Sporting Goods Store'
+SELECT * FROM t2019_kar_land_use_a
+
 
 SELECT DISTINCT
-	COUNT(t2019_p.geom)
+	t2019_p.*
 FROM
 	t2019_kar_poi_table t2019_p, 
 	t2019_kar_land_use_a t2019_l
 WHERE
-	t2019_p.type='Sporting Goods Store' AND t2019_l.type LIKE 'Park%' AND ST_Distance(t2019_p.geom, t2019_l.geom)<300;
-
+	t2019_p.type='Sporting Goods Store' AND t2019_l.type LIKE 'Park%' AND ST_Distance(ST_Transform(t2019_p.geom, 3068), ST_Transform(t2019_l.geom, 3068))<300;
 
 --zad8
 CREATE TABLE t2019_kar_bridges AS
