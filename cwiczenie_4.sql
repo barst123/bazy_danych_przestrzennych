@@ -67,3 +67,45 @@ SELECT
 	COUNT(*)
 FROM 
 	bristolbay_buildings;
+--zad6
+SELECT 
+	*
+FROM 
+	bristolbay_buildings b
+WHERE 
+	ST_Within(b.geom, ST_Buffer((SELECT ST_Union(r.geom) FROM rivers r), 100));
+
+SELECT 
+	COUNT(*)
+FROM 
+	bristolbay_buildings;
+--zad 7
+SELECT 
+	COUNT(*)
+FROM 
+	majrivers m,
+	railroads r
+WHERE 
+	ST_Intersects(m.geom, r.geom);
+--zad 8
+SELECT
+	COUNT(*)
+FROM 
+	vertices;
+--zad 9
+SELECT
+	ST_UNION(geom)
+FROM 
+	hotele_lokalizacja;
+--zad 10
+--przed simplify
+SELECT 
+	ST_Area(ST_Union(s.geom)), SUM(ST_Npoints(s.geom))
+FROM 
+	swamp s;
+	
+--po simplify
+SELECT 
+	ST_Area(ST_Union(s.geom)), SUM(ST_Npoints(s.geom))
+FROM 
+	simplified_swamp s;
