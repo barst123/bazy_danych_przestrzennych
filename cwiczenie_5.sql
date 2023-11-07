@@ -31,10 +31,9 @@ WHERE
 UPDATE 
 	obiekty
 SET
-	geom=ST_MakePolygon(ST_Union(geom, 'MULTILINESTRING((20.5 19.5, 20 20))'))
+	geom=ST_MakePolygon(ST_LineMerge(ST_Union(geom, 'MULTILINESTRING((20.5 19.5, 20 20))')))
 WHERE
-	nazwa='obiekt4'
-
+	nazwa='obiekt4';
 
 --zad4
 INSERT INTO obiekty
@@ -48,6 +47,15 @@ VALUES
 
 --zad5
 SELECT
+	SUM(ST_Area(ST_Buffer(geom,5)))
+FROM
+	obiekty
+WHERE
+	ST_HasArc(geom)=FALSE;
+
+
+
+SELECT
 	ST_Area(
 		ST_Buffer(
 			ST_Union(
@@ -58,10 +66,4 @@ SELECT
 	)
 FROM
 	obiekty;
-	
-SELECT
-ST_Union(
-				(SELECT geom FROM obiekty WHERE ST_HasArc(geom)=FALSE)
-			)
-FROM obiekty
  
