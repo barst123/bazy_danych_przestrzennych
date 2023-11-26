@@ -1,0 +1,7 @@
+raster2pgsql.exe -s 3763 -N -32767 -t 100x100 -I -C -M -d "C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\Dane - cw 7\srtm_1arc_v3.tif" rasters.dem > "C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\Dane - cw 7\dem.sql"
+
+raster2pgsql.exe -s 3763 -N -32767 -t 100x100 -I -C -M -d "C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\Dane - cw 7\srtm_1arc_v3.tif" rasters.dem | psql -d bdp_cw7 -h localhost -U postgres -p 5432
+
+raster2pgsql.exe -s 3763 -N -32767 -t 128x128 -I -C -M -d "C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\Dane - cw 7\Landsat8_L1TP_RGBN.tif" rasters.landsat8 | psql -d bdp_cw7 -h localhost -U postgres -p 5432
+
+gdal_translate -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 PG:"host=localhost port=5432 dbname=bdp_cw7 user=postgres password=postgres123 schema=staron table=porto_ndvi mode=2" porto_ndvi.tiff
