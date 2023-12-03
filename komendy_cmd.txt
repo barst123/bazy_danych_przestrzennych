@@ -1,0 +1,11 @@
+raster2pgsql.exe -s 27700 -N -32767 -t 256x256 -I -C -M -d "C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\cw8_dane\ras250_gb\data\*.tif" rasters.dane_uk_250 | psql -d bdp_cw8 -h localhost -U postgres -p 5432
+
+gdal_translate -of ENVI -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 PG:"host=localhost port=5432 dbname=bdp_cw8 user=postgres password=postgres123 schema=rasters table=uk_lake_district mode=2" C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\cw8_dane\uk_lake_district_gt.GTiff
+
+Dane sentinel:
+raster2pgsql.exe -s 3857 -N -32767 -t 256x256 -I -C -M -d "C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\cw8_dane\sentinel\sentinel_03.tiff" rasters.sentinel_03 | psql -d bdp_cw8 -h localhost -U postgres -p 5432
+
+raster2pgsql.exe -s 3857 -N -32767 -t 256x256 -I -C -M -d "C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\cw8_dane\sentinel\sentinel_08.tiff" rasters.sentinel_08 | psql -d bdp_cw8 -h localhost -U postgres -p 5432
+
+Eksport do GeoTiffa
+gdal_translate -of ENVI -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 PG:"host=localhost port=5432 dbname=bdp_cw8 user=postgres password=postgres123 schema=rasters table=ndwi mode=2" C:\Users\bartoszstaron\Desktop\Studia\3_rok\5_semestr\bazy_danych_przestrzennych\dane\cw8_dane\ndwi_gt.GTiff
