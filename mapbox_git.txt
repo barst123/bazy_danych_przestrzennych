@@ -1,0 +1,34 @@
+
+1.
+curl -X POST "https://api.mapbox.com/uploads/v1/bstaron/credentials?access_token=token
+
+{"bucket":"tilestream-tilesets-production",
+"key":"89/_pending/b0zd5bmodpm1rogcoeosyarlc/bstaron",
+"accessKeyId":"ASIATNLVGLR2BWL4DBJX",
+"secretAccessKey":"BGgJKpre53HVuRd9Sk/r73xOvrAYIeuyjsB9sSEd",
+"sessionToken":"FwoGZXIvYXdzELT//////////wEaDK3G1LC8uGOC7v3BciKTAp+rO9QXPn7DzFwMRWOAXdChiWlGA2DCKm539GKhkP1WmcUZTvcqDi6He1pswHUHWIES3UUcwfCNS9eGNy0Li69obx/Ekf3JDAo2z4lA5ZZ2hrsf9ykM2CE4+YvjMMASMVZ67EZoSqVodAroNe8DnPGMQ7Q/r7mbVhSuF4faZ979SBCnyQ74LwxccblgbhOtFCfuhqinWNj4Z9p6epkAvFSCF/QuNGiFnIbU3ZzMO9ouzPdWtajjJrNvHMxGaP9wFnRiyHRJOKqTz2BKt/J0aVPVa8pST3wQXrnxZ1NQIndYMuLiw8mTN51oRQL8tmtxxntYazzGjnG1/o+nOEew8Yqt1rCQ5Ez9D6sGUuKkjVPsxftFKJyGhq0GMimTSfpumhpnhNxdv8iVmNJMPR2XCtd2QLxfbPEEXgd41QYwWACRe4fzwA==",
+"url":"https://tilestream-tilesets-production.s3.amazonaws.com/89/_pending/b0zd5bmodpm1rogcoeosyarlc/bstaron"}
+
+2.
+$env:AWS_ACCESS_KEY_ID="ASIATNLVGLR2BWL4DBJX"
+$env:AWS_SECRET_ACCESS_KEY="BGgJKpre53HVuRd9Sk/r73xOvrAYIeuyjsB9sSEd"
+$env:AWS_SESSION_TOKEN="FwoGZXIvYXdzELT//////////wEaDK3G1LC8uGOC7v3BciKTAp+rO9QXPn7DzFwMRWOAXdChiWlGA2DCKm539GKhkP1WmcUZTvcqDi6He1pswHUHWIES3UUcwfCNS9eGNy0Li69obx/Ekf3JDAo2z4lA5ZZ2hrsf9ykM2CE4+YvjMMASMVZ67EZoSqVodAroNe8DnPGMQ7Q/r7mbVhSuF4faZ979SBCnyQ74LwxccblgbhOtFCfuhqinWNj4Z9p6epkAvFSCF/QuNGiFnIbU3ZzMO9ouzPdWtajjJrNvHMxGaP9wFnRiyHRJOKqTz2BKt/J0aVPVa8pST3wQXrnxZ1NQIndYMuLiw8mTN51oRQL8tmtxxntYazzGjnG1/o+nOEew8Yqt1rCQ5Ez9D6sGUuKkjVPsxftFKJyGhq0GMimTSfpumhpnhNxdv8iVmNJMPR2XCtd2QLxfbPEEXgd41QYwWACRe4fzwA=="
+
+3.
+aws s3 cp Desktop/Studia/3_rok/5_semestr/bazy_danych_przestrzennych/dane/T2019_KAR_POI.zip s3://tilestream-tilesets-production/89/_pending/b0zd5bmodpm1rogcoeosyarlc/bstaron --region us-east-1
+4.
+curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{
+	"url": "http://tilestream-tilesets-production.s3.amazonaws.com/89/_pending/b0zd5bmodpm1rogcoeosyarlc/bstaron", 
+	"tileset": "bstaron.T2019_KAR_POI", 
+	"name": "Karlsruhe POI"
+}' 'https://api.mapbox.com/uploads/v1/bstaron?access_token=token'
+
+{"id":"clraz2ftscdzz1tqndevgoohy",
+"name":"Karlsruhe POI",
+"complete":false,
+"error":null,
+"created":"2024-01-12T18:28:51.248Z",
+"modified":"2024-01-12T18:28:51.248Z",
+"tileset":"bstaron.T2019_KAR_POI",
+"owner":"bstaron",
+"progress":0}
