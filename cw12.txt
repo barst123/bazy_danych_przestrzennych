@@ -1,0 +1,55 @@
+star:
+import fme
+import smtplib
+import email.message
+from datetime import datetime
+
+mail_from=FME_MacroValues['email']
+mail_to=FME_MacroValues['email_klient']
+powiat=FME_MacroValues['powiat']
+
+now=datetime.now()
+date_time=now.strftime("%d/%m/%Y %H:%M:%S")
+
+msg=email.message.EmailMessage()
+msg['From']=mail_from
+msg['To']=mail_to
+msg.set_content('Drogi użytkowniku '+mail_to+', o godzinie '+date_time+' rozpoczęto przetwarzanie danych dla powiatu '+powiat)
+
+smtp_server='smtp.gmail.com'
+smtp_port=587
+smtp_username=FME_MacroValues['email']
+smtp_password=FME_MacroValues['haslo']
+server = smtplib.SMTP(smtp_server, smtp_port)
+server.starttls()
+server.login(smtp_username, smtp_password)
+server.send_message(msg)
+server.quit()
+
+end:
+import fme
+import smtplib
+import email.message
+from datetime import datetime
+
+mail_from=FME_MacroValues['email']
+mail_to=FME_MacroValues['email_klient']
+powiat=FME_MacroValues['powiat']
+
+now=datetime.now()
+date_time=now.strftime("%d/%m/%Y %H:%M:%S")
+
+msg=email.message.EmailMessage()
+msg['From']=mail_from
+msg['To']=mail_to
+msg.set_content('Drogi użytkowniku '+mail_to+', o godzinie '+date_time+' zakończono przetwarzanie danych dla powiatu '+powiat)
+
+smtp_server='smtp.gmail.com'
+smtp_port=587
+smtp_username=FME_MacroValues['email']
+smtp_password=FME_MacroValues['haslo']
+server = smtplib.SMTP(smtp_server, smtp_port)
+server.starttls()
+server.login(smtp_username, smtp_password)
+server.send_message(msg)
+server.quit()

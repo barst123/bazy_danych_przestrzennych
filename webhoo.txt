@@ -1,0 +1,26 @@
+Name:
+Webhook - cw10 from Dashboards - cb0616a1-82df-dbf9-ba5f-f7b77c52b38d
+
+Token:
+61320b7c55d21553dbac5e05ecf8b03329bbd1ca
+
+Description:
+Allow users to run Dashboards/cw10 without logging in
+
+Created Date:
+2024-01-19T22:47:37.792Z
+
+Expiration Date:
+2025-02-14T23:00:00.000Z
+
+Enabled:
+true
+
+Authorization with Header:
+http://DESKTOP-FP842VV/fmedatadownload/Dashboards/cw10.fmw?email=jan804557%40gmail.com&chmury=10&powiat=powiat%20Szczecin&data_poczatkowa=20230701000000&data_koncowa=20230715000000&api=e94d5a2f-3166-45b0-a9a2-4f192cb8a043&email_klient=jan804557%40gmail.com&haslo=&SourceDataset_SHAPEFILE=C%3A%5CUsers%5Cbartoszstaron%5CDesktop%5CStudia%5C3_rok%5C5_semestr%5Cbazy_danych_przestrzennych%5Ccw10%5Cpowiaty.shp&DestDataset_TIFF=C%3A%5CUsers%5Cbartoszstaron%5CDesktop%5CStudia%5C3_rok%5C5_semestr%5Cbazy_danych_przestrzennych%5Ccw10&opt_showresult=false&opt_servicemode=sync
+Header Key: Authorization
+Header Value: fmetoken token=61320b7c55d21553dbac5e05ecf8b03329bbd1ca
+
+Authorization with Query String:
+http://DESKTOP-FP842VV/fmedatadownload/Dashboards/cw10.fmw?email=jan804557%40gmail.com&chmury=10&powiat=powiat%20Szczecin&data_poczatkowa=20230701000000&data_koncowa=20230715000000&api=e94d5a2f-3166-45b0-a9a2-4f192cb8a043&email_klient=jan804557%40gmail.com&haslo=&SourceDataset_SHAPEFILE=C%3A%5CUsers%5Cbartoszstaron%5CDesktop%5CStudia%5C3_rok%5C5_semestr%5Cbazy_danych_przestrzennych%5Ccw10%5Cpowiaty.shp&DestDataset_TIFF=C%3A%5CUsers%5Cbartoszstaron%5CDesktop%5CStudia%5C3_rok%5C5_semestr%5Cbazy_danych_przestrzennych%5Ccw10&opt_showresult=false&opt_servicemode=sync&token=61320b7c55d21553dbac5e05ecf8b03329bbd1ca
+
